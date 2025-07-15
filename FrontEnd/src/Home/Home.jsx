@@ -26,7 +26,11 @@ const Home = () => {
         return;
       }
 
+<<<<<<< HEAD
       const base = "http://localhost:3000/";
+=======
+      const base = "https://short.ly/";
+>>>>>>> 87884aec9347351b6bb3c65bc43bfdb35428117f
       const code = shortcode || Math.random().toString(36).substring(2, 8);
       const generatedShortUrl = base + code;
 
