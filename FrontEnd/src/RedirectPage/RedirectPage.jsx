@@ -6,7 +6,6 @@ const RedirectPage = () => {
 
   useEffect(() => {
     const localRedirect = () => {
-<<<<<<< HEAD
       const allData = JSON.parse(localStorage.getItem("shortUrls")) || {};
       const data = allData[shortcode];
 
@@ -20,7 +19,7 @@ const RedirectPage = () => {
           window.location.href = originalUrl.startsWith("http")
             ? originalUrl
             :`http://${originalUrl}`;
-=======
+          
       const storedItem = localStorage.getItem(`shortlink_${shortcode}`);
 
       if (storedItem) {
@@ -28,7 +27,7 @@ const RedirectPage = () => {
         const now = new Date().getTime();
         if (!parsed.expiry || now < parsed.expiry) {
           window.location.href = parsed.url;
->>>>>>> 87884aec9347351b6bb3c65bc43bfdb35428117f
+
         } else {
           alert("Short URL has expired");
         }
