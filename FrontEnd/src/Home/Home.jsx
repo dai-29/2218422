@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { Log } from "../../../loggingMiddleware/Logging.middleware";
 import { Log } from "../utils/logger";
 
 const Home = () => {
@@ -19,7 +18,6 @@ const Home = () => {
       setError("");
       setShortUrl("");
 
-      // Basic URL validation
       const urlPattern =
         /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w\-._~:/?#[\]@!$&'()+,;=]*)?$/;
       if (!urlPattern.test(url)) {
@@ -28,10 +26,17 @@ const Home = () => {
         return;
       }
 
-      // Generate fake shortcode if not provided
-      const base = "https://short.ly/";
+      const base = "http://localhost:3000/";
       const code = shortcode || Math.random().toString(36).substring(2, 8);
       const generatedShortUrl = base + code;
+
+      const existingData = JSON.parse(localStorage.getItem("shortUrls")) || {};
+      existingData[code] = {
+        originalUrl: url,
+        validityMinutes: parseInt(validity),
+        createdAt: new Date().toISOString(),
+      };
+      localStorage.setItem("shortUrls", JSON.stringify(existingData));
 
       setShortUrl(generatedShortUrl);
       await Log("frontend", "info", "handler", "URL shortened locally");
